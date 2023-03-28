@@ -1,0 +1,11 @@
+0000000000000000000000000000000000000000 f1f8e9b76f6d8b8313802b64cccc95226a4fa1aa Jabooby <turcottejacob99@gmail.com> 1674153696 -0500	branch: Created from origin/Jacob-Turcotte
+f1f8e9b76f6d8b8313802b64cccc95226a4fa1aa 1987cdea26b2649345a95cdfea74a98179501fc5 Jabooby <turcottejacob99@gmail.com> 1674153742 -0500	commit: Delete Hello_world.txt
+1987cdea26b2649345a95cdfea74a98179501fc5 a88eee5c10e547ac619045a6b368cc3880fc3464 Jabooby <turcottejacob99@gmail.com> 1674153806 -0500	commit: Create Hello_world.txt
+a88eee5c10e547ac619045a6b368cc3880fc3464 71e3871c461ed22eb5d0690a4ef5c08614636117 Jabooby <turcottejacob99@gmail.com> 1674155167 -0500	commit: commit de documentation
+71e3871c461ed22eb5d0690a4ef5c08614636117 5588407027a743fcbdd13a9bdad38c937a1fa2bb Jabooby <turcottejacob99@gmail.com> 1674155787 -0500	commit: documentation session 1
+5588407027a743fcbdd13a9bdad38c937a1fa2bb 331ad24e3697c01a907a69a6201d088168ad115e Jabooby <turcottejacob99@gmail.com> 1674157559 -0500	commit: document session 1 pcb
+331ad24e3697c01a907a69a6201d088168ad115e 53465de83f59718ded2eaf23b2b9deb39ddf7ad1 Jabooby <turcottejacob99@gmail.com> 1674765551 -0500	commit: Terminer PCB ampli audio
+53465de83f59718ded2eaf23b2b9deb39ddf7ad1 d3c45a7c234e0473370718f71a91e2d11495bfb2 Jabooby <turcottejacob99@gmail.com> 1674765557 -0500	pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+d3c45a7c234e0473370718f71a91e2d11495bfb2 2cabed9e44d040cb9506530dc6d7b42171d1112c Jabooby <turcottejacob99@gmail.com> 1674767470 -0500	commit: Excel de liste de pièce
+2cabed9e44d040cb9506530dc6d7b42171d1112c 6f9fb43ce490f7cd75cd25f9ed283a7ab6c17966 Jabooby <turcottejacob99@gmail.com> 1676396889 -0500	commit: PCB_version1
+6f9fb43ce490f7cd75cd25f9ed283a7ab6c17966 ef8e8fbc5b0e321fa7d9a04a1de8f9ca0f2af5ac Jabooby <turcottejacob99@gmail.com> 1678796447 -0400	commit: Kicad, PA et site web

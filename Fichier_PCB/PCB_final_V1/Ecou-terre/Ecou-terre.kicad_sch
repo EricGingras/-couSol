@@ -1,0 +1,62 @@
+(kicad_sch (version 20211123) (generator eeschema)
+
+  (uuid 1a1f6f17-3ae7-41b7-a359-8f6ef7f1edb7)
+
+  (paper "USLetter")
+
+  (title_block
+    (title "Ecou-Terre")
+    (date "2023-01-30")
+    (rev "V1.0")
+    (company "Cégep de Sherbrooke & CRIFA")
+    (comment 1 "Jacob Turcotte")
+    (comment 2 "Eric Gingras")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 143.51 20.32) (size 111.76 81.28) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid 2fe8f8f1-9509-4ad0-bc05-ec9c0b9d5b25)
+    (property "Sheet name" "ESP32_&_connexion" (id 0) (at 143.51 19.6084 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "untitled.kicad_sch" (id 1) (at 143.51 102.1846 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet (at 20.32 111.76) (size 113.03 82.55) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid 835a799e-6ee7-45e5-a1d6-45f141a5bc0f)
+    (property "Sheet name" "Amplification_audio" (id 0) (at 20.32 111.0484 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "untitled.kicad_sch" (id 1) (at 20.32 194.8946 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet (at 20.32 20.32) (size 113.03 81.28) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid aeeb4bdf-6183-41c7-ad86-233b21c90fac)
+    (property "Sheet name" "Alimentation_10V" (id 0) (at 20.32 19.6084 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "untitled.kicad_sch" (id 1) (at 20.32 102.1846 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+    (path "/aeeb4bdf-6183-41c7-ad86-233b21c90fac" (page "2"))
+    (path "/2fe8f8f1-9509-4ad0-bc05-ec9c0b9d5b25" (page "3"))
+    (path "/835a799e-6ee7-45e5-a1d6-45f141a5bc0f" (page "4"))
+  )
+)

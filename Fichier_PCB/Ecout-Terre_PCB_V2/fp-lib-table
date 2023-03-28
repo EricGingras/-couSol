@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name "Custom_SOIC")(type "KiCad")(uri "D:/Session_4/PCB (prototypage)/programmeur_RS232/CPU_Boards/Custom_SOIC.pretty")(options "")(descr ""))
+  (lib (name "Audio")(type "KiCad")(uri "D:/Session_4/PCB (prototypage)/programmeur_RS232/CPU_Boards/Audio.pretty")(options "")(descr ""))
+)
