@@ -2230,8 +2230,8 @@
     (pin "2" (uuid e5dfad6e-2e29-4134-9399-df7a080c54dd))
     (pin "3" (uuid 87383bf7-1c71-4be7-bfea-b0bd80e846ea))
     (pin "4" (uuid 4671b832-3d70-4679-a592-8960cd1ad4a8))
-    (pin "5" (uuid 12955f89-5975-4a3a-9019-5714105ce090))
-    (pin "5" (uuid 12955f89-5975-4a3a-9019-5714105ce090))
+    (pin "5" (uuid 12955f89-5975-4a3a-9019-5714105ce092))
+    (pin "5" (uuid 12955f89-5975-4a3a-9019-5714105ce092))
   )
 
   (symbol (lib_id "power:GND") (at 135.89 99.06 0) (unit 1)
