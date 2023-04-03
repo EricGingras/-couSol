@@ -1,7 +1,7 @@
 # Écou-Terre
 **Déscription du projet:** 
 
-![plot](./Ecou-Terre/Documentation_sessionn5/SchémaSynoptiqueDT_V2.png)
+![Schéma Synoptique](https://github.com/EricGingras/Ecou-Terre/blob/main/Documentation_session5/Sch%C3%A9maSynoptiqueDT_V2.png)
 
 
 # Fichiers
