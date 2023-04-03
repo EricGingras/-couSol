@@ -1,7 +1,7 @@
 # Écou-Terre
 **Déscription du projet:** 
 
-![plot](./Documentation_sessionn5/SchémaSynoptiqueDT_V2.png)
+![plot](./Ecou-Terre/Documentation_sessionn5/SchémaSynoptiqueDT_V2.png)
 
 
 # Fichiers
