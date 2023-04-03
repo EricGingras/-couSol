@@ -1,35 +1,15 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- |
 
-# _Sample project_
+# _ESP_IDF_WEB_SERVER_
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+Ce code est un exemple de serveur web pour l'ESP32, une carte de développement basée sur un microcontrôleur ESP32 de la société Espressif. Le serveur utilise les bibliothèques ESP-IDF (Espressif IoT Development Framework) et LWIP (Lightweight IP), qui sont des bibliothèques logicielles pour développer des applications IoT (Internet des objets) pour les microcontrôleurs ESP32.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+Le code inclut des bibliothèques nécessaires pour utiliser les fonctionnalités du serveur Web, telles que l'envoi de fichiers HTML et la gestion des requêtes HTTP. Il utilise également la bibliothèque GPIO pour la gestion des broches, ainsi que la bibliothèque wifi pour se connecter à un réseau sans fil.
+
+Le code définit deux chaînes de caractères pour les réponses du serveur lors de la gestion de deux routes, '/led2on' et '/led2off', qui contrôlent l'état d'une broche GPIO. Les chaînes de caractères contiennent du code HTML pour la génération de pages web qui montrent l'état des broches et permettent de changer l'état via des boutons.
+
+La fonction principale du code crée une connexion wifi, initialise les bibliothèques nécessaires, configure la broche GPIO, crée une structure pour la configuration du serveur et démarre le serveur. Le serveur écoute les requêtes HTTP entrantes et gère les requêtes correspondantes en fonction de l'URL de la requête. Si la requête est '/led2on', le serveur change l'état de la broche GPIO et renvoie la page web correspondante via la chaîne de caractères 'on_resp'. Si la requête est '/led2off', le serveur change l'état de la broche GPIO et renvoie la page web correspondante via la chaîne de caractères 'off_resp'.
 
 
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
-
-```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+## Comment utilisé le code
+Ce code nécessite l'utilisation d'un point d'accès (PA) externe. Utilisez le fichier [main/Kconfig.projbuild](main/Kconfig.projbuild) qui se trouve dans le main. Vous devez entrer le SSID du PA ainsi que son mot de passe dans ce document. Une fois connectée, l'ESP-32 affichera dans le terminal son adresse IP et vous allez pouvoir y accéder grâce à votre navigateur web.
