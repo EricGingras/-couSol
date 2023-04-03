@@ -311,7 +311,7 @@
       (reference "J17") (unit 1) (value "Conn_Main_Diff") (footprint "Connector_Wire:SolderWire-0.75sqmm_1x02_P4.8mm_D1.25mm_OD2.3mm")
     )
     (path "/b4fe3e15-3341-4196-a877-71150725f069/d6742900-ff87-4773-a270-22ae520f3b11"
-      (reference "J?") (unit 1) (value "Conn_01x03_Male") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
+      (reference "J18") (unit 1) (value "Conn_01x03_Male") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
     )
     (path "/9ba5e03b-a4bb-45bf-93bb-8b74b8aee1bb/e392e342-6598-42fe-8078-76f3576f8715"
       (reference "L1") (unit 1) (value "3.3uH") (footprint "Inductor_SMD:L_Vishay_IHLP-4040")

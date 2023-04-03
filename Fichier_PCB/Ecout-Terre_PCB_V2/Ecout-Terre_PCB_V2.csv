@@ -1,65 +1,145 @@
-"Source:","D:\Session_6\Projet\EcouSol\Fichier_PCB\Ecout-Terre_PCB_V1\Ecout-Terre_PCB_V1.kicad_sch"
-"Date:","2023-02-20 1:49:10 PM"
-"Tool:","Eeschema (6.0.1)"
-"Generator:","C:\Program Files\KiCad\6.0\bin\scripting\plugins/bom_csv_grouped_by_value_with_fp.py"
-"Component Count:","103"
-"Ref","Qnty","Value","Cmp name","Footprint","Description","Vendor"
-"C1, C2, C5, C6, ","4","10u","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C3, C10, ","2","180uF","C_Polarized_US","Capacitor_SMD:CP_Elec_6.3x9.9","Polarized capacitor, US symbol",""
-"C4, C14, C17, C29, C30, C31, C32, C33, C34, C40, ","10","0.1uF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C7, ","1","3300pF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C8, ","1","56nF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C9, C18, C24, ","3","10pF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C11, C12, C13, C16, C39, ","5","1uF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C15, ","1","2.2uF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C19, C21, ","2","100pF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C20, ","1","22nF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C22, ","1","3.3uF","C_Polarized_US","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Polarized capacitor, US symbol",""
-"C23, C27, C28, C35, C36, ","5","10uF","C_Polarized","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Polarized capacitor",""
-"C25, ","1","0.047uF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"C26, ","1","470uF","C_Polarized_US","Capacitor_SMD:C_Elec_8x10.2","Polarized capacitor, US symbol",""
-"C37, C38, ","2","20pF","C","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","Unpolarized capacitor",""
-"D1, ","1","MCCSK54B-LTP","D_Schottky","Diode_SMD:D_SMB","Schottky diode",""
-"D2, D3, D4, D5, ","4","D_Zener","D_Zener","Diode_SMD:D_SOD-123","Zener diode",""
-"D6, ","1","DEL_5V","LED","LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder","Light emitting diode",""
-"D7, ","1","DEL_3V3","LED","LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder","Light emitting diode",""
-"J1, ","1","USB_C_Receptacle_USB2.0","USB_C_Receptacle_USB2.0","Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12","USB 2.0-only Type-C Receptacle connector",""
-"J2, ","1","Pile","Screw_Terminal_01x02","TerminalBlock:TerminalBlock_bornier-2_P5.08mm","Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J4, ","1","Test_5V","Conn_01x02_Male","Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical","Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J5, ","1","Conn_Alim","Screw_Terminal_01x04","TerminalBlock:TerminalBlock_bornier-4_P5.08mm","Generic screw terminal, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J6, ","1","Test_3V3","Conn_01x02_Male","Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical","Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J7, J8, ","2","Conn_ESP","Conn_01x19_Female","Connector_PinSocket_2.54mm:PinSocket_1x19_P2.54mm_Vertical","Generic connector, single row, 01x19, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J9, ","1","Sortie_alim","Screw_Terminal_01x04","TerminalBlock:TerminalBlock_bornier-4_P5.08mm","Generic screw terminal, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J10, ","1","Micro_SD_Card","Micro_SD_Card","Connector_Card:microSD_HC_Wuerth_693072010801","Micro SD Card Socket",""
-"J11, ","1","Test_10V","Conn_01x02_Male","Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical","Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J12, ","1","Conn_test_ampli","Conn_01x03_Male","Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical","Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J13, ","1","Conn_GPS","Conn_01x04_Male","Connector_PinSocket_2.00mm:PinSocket_1x04_P2.00mm_Vertical","Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",""
-"J14, ","1","AudioJack_Mono","AudioJack2_Ground","Audio:3_5mm_audioJack","Audio Jack, 2 Poles (Mono / TS), Grounded Sleeve",""
-"L1, ","1","3.3uH","L","Inductor_SMD:L_Vishay_IHLP-4040","Inductor",""
-"MK1, ","1","Micro","Microphone_Condenser","TerminalBlock:TerminalBlock_bornier-2_P5.08mm","Condenser microphone",""
-"Q1, ","1","CSD16327Q3","CSD16327Q3","Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET","",""
-"R1, ","1","2.2k","R_US","Resistor_SMD:R_0805_2012Metric","Resistor, US symbol",""
-"R2, ","1","27k","R_US","Resistor_SMD:R_0805_2012Metric","Resistor, US symbol",""
-"R3, ","1","1000","R_US","Resistor_SMD:R_0805_2012Metric","Resistor, US symbol",""
-"R4, ","1","6.8k","R_US","Resistor_SMD:R_0805_2012Metric","Resistor, US symbol",""
-"R5, ","1","100","R_US","Resistor_SMD:R_0805_2012Metric","Resistor, US symbol",""
-"R6, ","1","8m","R_US","Resistor_SMD:R_0815_2038Metric_Pad1.20x4.05mm_HandSolder","Resistor, US symbol",""
-"R7, R8, R9, R10, R11, R22, R23, R24, R25, R26, R27, R28, R29, ","13","10k","R","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor",""
-"R12, ","1","1M","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"R13, ","1","75k","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"R14, R16, ","2","47k","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"R15, R17, ","2","51","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"R18, ","1","470","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"R19, ","1","330","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"R20, ","1","10","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"R21, ","1","1k","R_US","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","Resistor, US symbol",""
-"RV1, ","1","10k","R_Potentiometer_US","Potentiometer_THT:Potentiometer_Bourns_3386P_Vertical","Potentiometer, US symbol",""
-"RV2, RV3, ","2","100k","R_Potentiometer_US","Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical","Potentiometer, US symbol",""
-"U1, ","1","TS3480CX33RFG","TS3480CX33RFG","Package_TO_SOT_SMD:SOT-23","",""
-"U2, ","1","MC33269","MC33269","Package_SO:SO-8_3.9x4.9mm_P1.27mm","",""
-"U3, ","1","LM3478","LM3478","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm","",""
-"U4, ","1","PCM1804","PCM1804","Package_SO:SSOP-28_5.3x10.2mm_P0.65mm","",""
-"U5, ","1","TL072","TL072","Custom_SOIC:SOIC-8_3.9_et_5.3mm","Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8",""
-"U6, ","1","LM386","LM386","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm","Low Voltage Audio Power Amplifier, DIP-8/SOIC-8/SSOP-8",""
-"U7, ","1","74LVT04","74HC04","Package_SO:SOIC-14_3.9x8.7mm_P1.27mm","Hex Inverter",""
-"Y1, ","1","7V-22.5792MAHV-T","Crystal","Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm","Two pin crystal",""
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+Ref,Qnty,Value,Cmp name,Footprint
+,,,,
+"C1, C2, C5, C6, ",4,10u,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C3, C10, ",2,180uF,C_Polarized_US,Capacitor_SMD:CP_Elec_6.3x9.9
+,,,,
+"C4, C14, C17, C29, C30, C31, C32, C33, C34, C40, C42, ",11,0.1uF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C7, ",1,3300pF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C8, ",1,56nF,C,Capacitor_SMD:C_0504_1310Metric_Pad0.83x1.28mm_HandSolder
+,,,,
+"C9, C18, C24, ",3,10pF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C11, C12, C13, C16, C39, C41, C43, C44, ",8,1uF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C15, ",1,2.2uF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C19, C21, ",2,0.022uF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C20, ",1,22nF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C22, ",1,3.3uF,C_Polarized_US,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C23, C27, C28, C35, C36, ",5,10uF,C_Polarized,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C25, ",1,0.047uF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"C26, ",1,470uF,C_Polarized_US,Capacitor_SMD:C_Elec_8x10.2
+,,,,
+"C37, C38, ",2,20pF,C,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder
+,,,,
+"D1, ",1,MCCSK54B-LTP,D_Schottky,Diode_SMD:D_SMB
+,,,,
+"D2, D3, D4, D5, ",4,D_Z_2V4,D_Zener,Diode_SMD:D_SOD-123
+,,,,
+"D6, ",1,DEL_5V,LED,LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+,,,,
+"D7, ",1,DEL_3V3,LED,LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder
+,,,,
+"J1, ",1,USB_C_Receptacle_USB2.0,USB_C_Receptacle_USB2.0,Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12
+,,,,
+"J2, ",1,Pile,Screw_Terminal_01x02,TerminalBlock:TerminalBlock_bornier-2_P5.08mm
+,,,,
+"J3, ",1,AudioJack4,AudioJack4,Connector_Audio:Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal
+,,,,
+"J4, ",1,Test_5V,Conn_01x02_Male,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical
+,,,,
+"J5, ",1,Conn_Alim,Screw_Terminal_01x04,TerminalBlock:TerminalBlock_bornier-4_P5.08mm
+,,,,
+"J6, ",1,Test_3V3,Conn_01x02_Male,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical
+,,,,
+"J7, J8, ",2,Conn_ESP,Conn_01x19_Female,Connector_PinSocket_2.54mm:PinSocket_1x19_P2.54mm_Vertical
+,,,,
+"J9, ",1,Sortie_alim,Screw_Terminal_01x04,TerminalBlock:TerminalBlock_bornier-4_P5.08mm
+,,,,
+"J10, ",1,Micro_SD_Card,Micro_SD_Card,Connector_Card:microSD_HC_Wuerth_693072010801
+,,,,
+"J11, ",1,Test_10V,Conn_01x02_Male,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical
+,,,,
+"J12, ",1,Conn_01x01_Male,Conn_01x01_Male,Connector_PinSocket_2.54mm:PinSocket_1x01_P2.54mm_Vertical
+,,,,
+"J13, ",1,Conn_GPS,Conn_01x04_Male,Connector_PinSocket_2.00mm:PinSocket_1x04_P2.00mm_Vertical
+,,,,
+"J14, ",1,Conn_Audio_Alim,Conn_01x02_Female,Connector_Wire:SolderWire-0.75sqmm_1x02_P4.8mm_D1.25mm_OD2.3mm
+,,,,
+"J15, ",1,Conn_Audio_Diff,Conn_01x02_Female,Connector_Wire:SolderWire-0.75sqmm_1x02_P4.8mm_D1.25mm_OD2.3mm
+,,,,
+"J16, ",1,Conn_Main_Alim,Conn_01x02_Female,Connector_Wire:SolderWire-0.75sqmm_1x02_P4.8mm_D1.25mm_OD2.3mm
+,,,,
+"J17, ",1,Conn_Main_Diff,Conn_01x02_Female,Connector_Wire:SolderWire-0.75sqmm_1x02_P4.8mm_D1.25mm_OD2.3mm
+,,,,
+"J18, ",1,Conn_01x03_Male,Conn_01x03_Male,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical
+,,,,
+"L1, ",1,3.3uH,L,Inductor_SMD:L_Vishay_IHLP-4040
+,,,,
+"MK1, ",1,Micro,Microphone_Condenser,Connector_Wire:SolderWire-0.1sqmm_1x02_P3.6mm_D0.4mm_OD1mm
+,,,,
+"Q1, ",1,CSD16327Q3,CSD16327Q3,Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET
+,,,,
+"R1, ",1,2.2k,R_US,Resistor_SMD:R_0805_2012Metric
+,,,,
+"R2, ",1,27k,R_US,Resistor_SMD:R_0805_2012Metric
+,,,,
+"R3, ",1,1000,R_US,Resistor_SMD:R_0805_2012Metric
+,,,,
+"R4, ",1,6.8k,R_US,Resistor_SMD:R_0805_2012Metric
+,,,,
+"R5, ",1,100,R_US,Resistor_SMD:R_0805_2012Metric
+,,,,
+"R6, ",1,8m,R_US,Resistor_SMD:R_0815_2038Metric_Pad1.20x4.05mm_HandSolder
+,,,,
+"R7, R8, R9, R10, R11, R22, R23, R24, R25, R26, R27, R28, R29, R30, R31, R32, R33, R37, R38, ",19,10k,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R12, ",1,1M,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R13, ",1,75k,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R14, R16, ",2,47k,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R15, R17, ",2,120,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R18, ",1,470,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R19, ",1,330,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R20, ",1,10,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R21, ",1,1k,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R34, R35, ",2,2.2k,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R36, ",1,680,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R39, ",1,9.1k,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"R40, ",1,1.25k,R_US,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
+,,,,
+"RV1, ",1,10k,R_Potentiometer_US,Potentiometer_THT:Potentiometer_Bourns_3386P_Vertical
+,,,,
+"RV2, ",1,100k,R_Potentiometer_US,Potentiometer_SMD:Potentiometer_Bourns_TC33X_Vertical
+,,,,
+"U1, ",1,TS3480CX33RFG,TS3480CX33RFG,Package_TO_SOT_SMD:SOT-23
+,,,,
+"U2, ",1,MC33269,MC33269,Package_SO:SO-8_3.9x4.9mm_P1.27mm
+,,,,
+"U3, ",1,LM3478,LM3478,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
+,,,,
+"U4, ",1,PCM1804,PCM1804,Package_SO:SSOP-28_5.3x10.2mm_P0.65mm
+,,,,
+"U5, U8, ",2,OPA1656,TL072,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
+,,,,
+"U6, ",1,LM386,LM386,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
+,,,,
+"U7, ",1,74LVT04,74HC04,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm
+,,,,
+"Y1, ",1,7V-22.5792MAHV-T,Crystal,Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm
