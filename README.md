@@ -1,5 +1,7 @@
 # Écou-Terre
-**Déscription du projet:** 
+**Déscription du projet:** Nous créons un module qui captera le bruit des vers de terre. Ceci est le répertoire git de tous les fichiers techniques pour notre projet.
+
+**Déscription technique:** Nous utilisons un microphone électret pour capter le bruit des vers de terre. Ce signal est ensuite amplifié et numérisé pour pouvoir le transmettre dans un ESP-32. Par la suite, l'échantillon de son est enregistré dans une carte SD en format WAV. Le module au complet est alimenté par une pile 4.2 volts.
 
 ![Schéma Synoptique](https://github.com/EricGingras/Ecou-Terre/blob/main/Documentation_session5/Sch%C3%A9maSynoptiqueDT_V2.jpg)
 
