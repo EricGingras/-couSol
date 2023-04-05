@@ -2,7 +2,7 @@
 
 ![Schéma Synoptique](https://github.com/EricGingras/Ecou-Terre/blob/main/Documentation_session5/Sch%C3%A9maSynoptiqueDT_V2.jpg)
 
-**Déscription technique:** Nous utilisons un microphone électret pour capter le bruit des vers de terre. Ce signal est ensuite amplifié et numérisé pour pouvoir le transmettre dans un ESP-32 en format I2S. Par la suite, ces données I2S sont enregistré dans une carte SD en format WAV. Il y a aussi un connecteur jack 3,5mm pour l'écout en temps réelle des vers de terre. Le module au complet est alimenté par une pile 4.2 volts. Pour contrôler le module, nous allons avoir un page web avec un interface pour le démarrage, l'ârret et d'autre fonctions du module.
+**Déscription technique:** Nous utilisons un microphone électret pour capter le bruit des vers de terre. Ce signal est ensuite amplifié et numérisé pour pouvoir le transmettre dans un ESP-32 en format I2S. Par la suite, ces données I2S sont enregistrées dans une carte SD en format WAV, ce qui permet ensuite de les écouter sur un ordinateur. Il y a aussi un connecteur jack 3,5mm pour l'écoute en temps réelle des vers de terre. Le module au complet est alimenté par une pile 4.2 volts. Pour le contrôler, nous allons avoir un page web avec un interface pour le démarrage, l'ârret et d'autre fonctions du module.
 
 # Fichiers
 > Déscription des fichiers dans le répertoire git.
