@@ -1,6 +1,6 @@
 # Écou-Terre
 
-**Déscription du projet:** Nous créons un module qui captera le bruit des vers de terre et donnera ainsi une idée sur la biodiversité et la santé des sols. Ceci est le répertoire git de tous les fichiers techniques pour notre projet.
+**Déscription du projet:** Nous sommes en train de concevoir un module qui peut capter les bruits émis par les vers de terre, offrant ainsi une perspective sur la biodiversité et la santé des sols.  Ceci est le répertoire git de tous les fichiers techniques pour notre projet.
 
 ![Schéma Synoptique](https://github.com/EricGingras/Ecou-Terre/blob/main/Documentation_session5/Sch%C3%A9maSynoptiqueDT_V2.jpg)
 
