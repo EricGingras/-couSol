@@ -36,7 +36,7 @@ void setup() {
   file = SD.open(filename, FILE_WRITE);
   if (!file) return;
   file.write(header, headerSize);
-  I2S_Init(I2S_MODE, I2S_BITS_PER_SAMPLE_32BIT);
+  I2S_Init(I2S_MODE_RX, I2S_BITS_PER_SAMPLE_32BIT);
   Serial.println("start recording");
   for (int j = 0; j < waveDataSize/numPartWavData; ++j) {
     i2s_read(I2S_NUM_0, (char *)communicationData, numCommunicationData ,&bytesRead, portMAX_DELAY);
