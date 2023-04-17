@@ -30,13 +30,13 @@ void CreateWavHeader(byte* header, int waveDataSize){
   header[25] = 0xAC;
   header[26] = 0x00;
   header[27] = 0x00;
-  header[28] = 0xCC;  // Byte/sec = 44100x2x1 = 88200
-  header[29] = 0x04;
-  header[30] = 0x02;
+  header[28] = 0x88;  // Byte/sec = 44100x2x1 = 88200
+  header[29] = 0x58;
+  header[30] = 0x01;
   header[31] = 0x00;
-  header[32] = 0x03;  // 24bit monoral
+  header[32] = 0x02;  // 24bit monoral
   header[33] = 0x00;
-  header[34] = 0x18;  // 24bit
+  header[34] = 0x10;  // 24bit
   header[35] = 0x00;
   header[36] = 'd';
   header[37] = 'a';
