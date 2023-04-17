@@ -1,6 +1,6 @@
 #include "Wav.h"
 
-void CreateWavHeader(byte* header, int waveDataSize){
+void CreateWavHeader(byte* header, int waveDataSize) {
   header[0] = 'R';
   header[1] = 'I';
   header[2] = 'F';
@@ -24,19 +24,19 @@ void CreateWavHeader(byte* header, int waveDataSize){
   header[19] = 0x00;
   header[20] = 0x01;  // linear PCM
   header[21] = 0x00;
-  header[22] = 0x01;  // monoral
+  header[22] = 0x01;  // Mono
   header[23] = 0x00;
   header[24] = 0x44;  // sampling rate 44100
   header[25] = 0xAC;
   header[26] = 0x00;
   header[27] = 0x00;
-  header[28] = 0x88;  // Byte/sec = 44100x2x1 = 88200
-  header[29] = 0x58;
-  header[30] = 0x01;
+  header[28] = 0x10;  // Byte/sec = 44100x1x4 = 176400
+  header[29] = 0xB1;
+  header[30] = 0x02;
   header[31] = 0x00;
-  header[32] = 0x02;  // 0x02 = 16bit // 0x03 = 24bit 
+  header[32] = 0x04;  // 1 * (32/8) = 1*4
   header[33] = 0x00;
-  header[34] = 0x10;  // 0x10 = 16bit // 0x18 = 24bit
+  header[34] = 0x20;  // 32-bit aka 32 in hexa
   header[35] = 0x00;
   header[36] = 'd';
   header[37] = 'a';
@@ -46,4 +46,5 @@ void CreateWavHeader(byte* header, int waveDataSize){
   header[41] = (byte)((waveDataSize >> 8) & 0xFF);
   header[42] = (byte)((waveDataSize >> 16) & 0xFF);
   header[43] = (byte)((waveDataSize >> 24) & 0xFF);
-}
+} 
+
