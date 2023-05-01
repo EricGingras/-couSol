@@ -32,7 +32,7 @@ static const char *TAG = "pcm_recorder";
 #define SAMPLE_SIZE         1024
 #define BYTE_RATE           (CONFIG_SAMPLE_RATE * (CONFIG_BIT_SAMPLE / 8)) * NUM_CHANNELS
 #define BUTTON_PIN 25
-#define LED_PIN 23
+#define LED_PIN 33
 #define MAX_FILENAME_LEN  32
 
 void mount_sdcard(void);
@@ -209,6 +209,9 @@ void record_wav(void*)
     // Use POSIX and C standard library functions to work with files.
     int flash_wr_size = 0;
     int rec_time = 5;
+    char test_fichier_doublons = 0;
+    int flash_del = 0;
+    int etat_led = 0;
     button_press_count++;
     gpio_set_level(LED_PIN, 1);
     ESP_LOGI(TAG, "Opening file");
@@ -218,15 +221,22 @@ void record_wav(void*)
     generate_wav_header(wav_header_fmt, flash_rec_time, CONFIG_SAMPLE_RATE);
     ESP_LOGI(TAG, "Generating WAV header");
 
-    // Create folder name
-    snprintf(folder_path, sizeof(folder_path), "/sdcard/enregistrement%d", button_press_count);
     
-    // Create the folder
-    esp_err_t ret = mkdir(folder_path, 0777);
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to create folder");
-        return;
+    
+    while(test_fichier_doublons == 0)
+    {
+        // Create folder name
+        snprintf(folder_path, sizeof(folder_path), "/sdcard/enregistrement%d", button_press_count);
+        // Create the folder
+        esp_err_t ret = mkdir(folder_path, 0777);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to create folder");
+            button_press_count++;
+        }
+        else
+            test_fichier_doublons++;
     }
+    
 
     // Create the file path
     snprintf(file_path, sizeof(file_path), "%s/record.wav", folder_path);
@@ -252,6 +262,12 @@ void record_wav(void*)
         }
         else {
             printf("Read Failed!\n");
+        }
+        flash_del++;
+        if(flash_del % 22 == 0) //environs au quart de seconde
+        {
+            etat_led = !etat_led;
+            gpio_set_level(LED_PIN, etat_led);
         }
     }
     fclose(file);
@@ -291,11 +307,10 @@ void record_wav(void*)
     ESP_LOGI(TAG, "Card unmounted");
     // Deinitialize the bus after all devices are removed
     spi_bus_free(host.slot);
-    gpio_set_level(LED_PIN, 0);
 
     ESP_ERROR_CHECK(i2s_channel_disable(rx_handle)); // Stop the I2S channel
     ESP_ERROR_CHECK(i2s_del_channel(rx_handle)); // Delete the I2S driver
-
+    gpio_set_level(LED_PIN, 0);
     vTaskDelete(NULL);
 }
 
