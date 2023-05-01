@@ -32,7 +32,8 @@ static const char *TAG = "pcm_recorder";
 #define SAMPLE_SIZE         1024
 #define BYTE_RATE           (CONFIG_SAMPLE_RATE * (CONFIG_BIT_SAMPLE / 8)) * NUM_CHANNELS
 #define BUTTON_PIN 25
-#define LED_PIN 0
+#define LED_PIN 23
+#define MAX_FILENAME_LEN  32
 
 void mount_sdcard(void);
 void init_i2s_driver(void);
@@ -53,6 +54,10 @@ const int WAVE_HEADER_SIZE = 44;
 static volatile bool is_recording = false;
 QueueHandle_t interputQueue;
 
+static int button_press_count = 0;
+char folder_path[MAX_FILENAME_LEN];
+char file_path[MAX_FILENAME_LEN + 32]; // Extra characters for "/record.wav"
+
 static void IRAM_ATTR gpio_interrupt_handler(void *args)
 {
     int pinNumber = (int)args;
@@ -61,7 +66,7 @@ static void IRAM_ATTR gpio_interrupt_handler(void *args)
 
 void Record_Control_Task(void *params)
 {
-    int pinNumber, count = 0;
+    int pinNumber=0;
     while(true)
     {
         if (xQueueReceive(interputQueue, &pinNumber, portMAX_DELAY))
@@ -74,7 +79,7 @@ void Record_Control_Task(void *params)
             {
                 vTaskDelay(10);
             }
-            printf("GPIO %d was pressed %d times. The state is %d\n", pinNumber, count++, gpio_get_level(BUTTON_PIN));
+            //printf("GPIO %d was pressed %d times. The state is %d\n", pinNumber, button_press_count++, gpio_get_level(BUTTON_PIN));
             if(is_recording == false)
             {
                 is_recording = true;
@@ -109,7 +114,9 @@ void init_interrupt(void)
     //gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
 
     esp_rom_gpio_pad_select_gpio(BUTTON_PIN);
+    esp_rom_gpio_pad_select_gpio(LED_PIN);
     gpio_set_direction(BUTTON_PIN, GPIO_MODE_INPUT);
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
     gpio_pulldown_en(BUTTON_PIN);
     gpio_pullup_dis(BUTTON_PIN);
     gpio_set_intr_type(BUTTON_PIN, GPIO_INTR_POSEDGE);
@@ -119,6 +126,7 @@ void init_interrupt(void)
 
     gpio_install_isr_service(0);
     gpio_isr_handler_add(BUTTON_PIN, gpio_interrupt_handler, (void *)BUTTON_PIN);
+    gpio_set_level(LED_PIN, 0);
 }
 
 void mount_sdcard(void)
@@ -201,6 +209,8 @@ void record_wav(void*)
     // Use POSIX and C standard library functions to work with files.
     int flash_wr_size = 0;
     int rec_time = 5;
+    button_press_count++;
+    gpio_set_level(LED_PIN, 1);
     ESP_LOGI(TAG, "Opening file");
 
     char wav_header_fmt[WAVE_HEADER_SIZE];
@@ -208,17 +218,22 @@ void record_wav(void*)
     generate_wav_header(wav_header_fmt, flash_rec_time, CONFIG_SAMPLE_RATE);
     ESP_LOGI(TAG, "Generating WAV header");
 
-    // First check if file exists before creating a new file.
-    struct stat st;
-    if (stat(SD_MOUNT_POINT"/record.wav", &st) == 0) {
-        // Delete it if it exists
-        unlink(SD_MOUNT_POINT"/record.wav");
+    // Create folder name
+    snprintf(folder_path, sizeof(folder_path), "/sdcard/enregistrement%d", button_press_count);
+    
+    // Create the folder
+    esp_err_t ret = mkdir(folder_path, 0777);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to create folder");
+        return;
     }
 
-    ESP_LOGI(TAG, "WAV file verification");
-    // Create new WAV file
-    FILE *f = fopen(SD_MOUNT_POINT"/record.wav", "a");
-    if (f == NULL) {
+    // Create the file path
+    snprintf(file_path, sizeof(file_path), "%s/record.wav", folder_path);
+
+    // Open the file for writing
+    FILE* file = fopen(file_path, "a");
+    if (file == NULL) {
         ESP_LOGE(TAG, "Failed to open file for writing");
         vTaskDelete(NULL);
         return;
@@ -226,49 +241,49 @@ void record_wav(void*)
 
     ESP_LOGI(TAG, "Creating WAV file");
     // Write the header to the WAV file
-    fwrite(wav_header_fmt, 1, WAVE_HEADER_SIZE, f);
+    fwrite(wav_header_fmt, 1, WAVE_HEADER_SIZE, file);
 
     while (is_recording) { 
         // Read the RAW samples from the microphone
         if (i2s_channel_read(rx_handle, (void *)i2s_readraw_buff, SAMPLE_SIZE, &bytes_read, 1000) == ESP_OK) {
             // Write the samples to the WAV file
             flash_wr_size += bytes_read;
-            fwrite(i2s_readraw_buff, 1, bytes_read, f);
+            fwrite(i2s_readraw_buff, 1, bytes_read, file);
         }
         else {
             printf("Read Failed!\n");
         }
     }
-    fclose(f);
+    fclose(file);
 
-    // Create new WAV file
-    f = fopen(SD_MOUNT_POINT"/record.wav", "r+");
-    if (f == NULL) {
+    // modify WAV header
+    file = fopen(file_path, "r+");
+    if (file == NULL) {
         ESP_LOGE(TAG, "Failed to open file for readig and writing");
         vTaskDelete(NULL);
         return;
     }
 
     // Place the cursor at the end of the WAV file
-    fseek(f, 0, SEEK_END);  
+    fseek(file, 0, SEEK_END);  
 
     // Find the size of the WAV file
-    uint32_t fileSize = ftell(f);
+    uint32_t fileSize = ftell(file);
 
     // Calculate the size of the audio data (excluding the WAV header)
     uint32_t dataSize = fileSize - 44;
 
     // Place the cursor at the beginning of the WAV file
-    fseek(f, 0, SEEK_SET); 
+    fseek(file, 0, SEEK_SET); 
 
     // Regenerate the wav header with the correct size
     generate_wav_header(wav_header_fmt, dataSize, CONFIG_SAMPLE_RATE);
 
     // Rewrite the header to the WAV file with the correct timing
-    fwrite(wav_header_fmt, 1, WAVE_HEADER_SIZE, f);
+    fwrite(wav_header_fmt, 1, WAVE_HEADER_SIZE, file);
 
     ESP_LOGI(TAG, "Recording done!");
-    fclose(f);
+    fclose(file);
     ESP_LOGI(TAG, "File written on SDCard");
 
     // All done, unmount partition and disable SPI peripheral
@@ -276,6 +291,7 @@ void record_wav(void*)
     ESP_LOGI(TAG, "Card unmounted");
     // Deinitialize the bus after all devices are removed
     spi_bus_free(host.slot);
+    gpio_set_level(LED_PIN, 0);
 
     ESP_ERROR_CHECK(i2s_channel_disable(rx_handle)); // Stop the I2S channel
     ESP_ERROR_CHECK(i2s_del_channel(rx_handle)); // Delete the I2S driver

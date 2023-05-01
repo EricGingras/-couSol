@@ -14,5 +14,10 @@
     "idf.pythonBinPathWin": "C:\\Users\\turco\\.espressif\\python_env\\idf5.0_py3.8_env\\Scripts\\python.exe",
     "idf.toolsPathWin": "C:\\Users\\turco\\.espressif",
     "idf.portWin": "COM4",
-    "idf.flashType": "UART"
+    "idf.flashType": "UART",
+    "files.associations": {
+        "i2s_std.h": "c",
+        "i2s_types.h": "c",
+        "i2s_common.h": "c"
+    }
 }
