@@ -1,4 +1,25 @@
+/*
+Ce code est destiné à créer un point d'accès Wi-Fi avec un serveur web embarqué sur un microcontrôleur ESP32. Voici une description des différentes parties du code :
+Les gestionnaires d'événements recordOFF_handler et recordON_handler sont des fonctions qui sont exécutées lorsque certaines pages Web sont ouvertes. 
+Ces fonctions contrôlent les broches GPIO pour allumer ou éteindre une LED.
 
+La section "SECTION HTML" contient des définitions de chaînes de caractères représentant le code HTML des différentes pages du serveur web. 
+Ces pages affichent des boutons pour allumer ou éteindre la LED.
+
+La fonction start_webserver configure et lance le serveur web en utilisant les gestionnaires d'événements définis précédemment.
+
+Les fonctions wifi_event_handler, wifi_init_softap et start_wifi_softap sont utilisées pour configurer et démarrer le point d'accès Wi-Fi. 
+Elles définissent le SSID, le mot de passe, le canal et d'autres paramètres du point d'accès.
+
+La fonction app_main est la fonction principale du programme. Elle initialise le point d'accès Wi-Fi et le serveur web, 
+puis met en attente les événements du système.
+
+En résumé, ce code crée un point d'accès Wi-Fi avec un serveur web embarqué qui contrôle une LED à l'aide de boutons affichés sur les pages web. 
+L'utilisateur peut allumer ou éteindre la LED en accédant aux pages web via le point d'accès Wi-Fi créé par l'ESP32.
+
+Matériel requis: esp32
+Écrit par Jacob Turcotte
+*/
 //---------------------------DÉBUT LIBRAIRIES------------------------------//
 #include <stdio.h>
 #include <stdlib.h>
@@ -207,13 +228,18 @@ static const httpd_uri_t root = {
 //----------------------------FIN SECTION HTML-----------------------------//
 
 //---------------------------GESTION SERVER WEB----------------------------//
+/// @brief Cette fonction gère les erreurs 404 dans un serveur HTTP en envoyant une réponse d'erreur 404 avec un message personnalisé.
+/// @param req Un pointeur vers une structure httpd_req_t représentant la requête HTTP.
+/// @param err Le code d'erreur httpd_err_code_t correspondant à l'erreur rencontrée.
+/// @return Un code d'erreur esp_err_t indiquant le statut de l'opération (ESP_FAIL en cas d'erreur).
 esp_err_t http_404_error_handler(httpd_req_t *req, httpd_err_code_t err)
 {
     /* For any other URI send 404 and close socket */
     httpd_resp_send_err(req, HTTPD_404_NOT_FOUND, "Some 404 error message");
     return ESP_FAIL;
 }
-
+/// @brief Cette fonction démarre un serveur HTTP en utilisant la configuration par défaut et enregistre des gestionnaires d'URI spécifiques.
+/// @return Un pointeur vers une structure httpd_handle_t représentant le serveur HTTP démarré avec succès, ou NULL en cas d'erreur.
 static httpd_handle_t start_webserver(void)
 {
     httpd_handle_t server = NULL;
@@ -235,12 +261,19 @@ static httpd_handle_t start_webserver(void)
     return NULL;
 }
 
+/// @brief Cette fonction arrête un serveur HTTP spécifié.
+/// @param server Un pointeur vers une structure httpd_handle_t représentant le serveur HTTP à arrêter.
 static void stop_webserver(httpd_handle_t server)
 {
     // Stop the httpd server
     httpd_stop(server);
 }
 
+/// @brief Événement qui s'exécute lorsqu'une déconnexion réseau est détectée. Il arrête le serveur HTTP s'il est en cours d'exécution.
+/// @param arg Un pointeur vers une structure httpd_handle_t* représentant le serveur HTTP à arrêter.
+/// @param event_base La base de l'événement qui a déclenché cet événement.
+/// @param event_id L'ID de l'événement qui a été déclenché.
+/// @param event_data Les données de l'événement associé.
 static void disconnect_handler(void* arg, esp_event_base_t event_base,
                                int32_t event_id, void* event_data)
 {
@@ -252,6 +285,11 @@ static void disconnect_handler(void* arg, esp_event_base_t event_base,
     }
 }
 
+/// @brief Événement qui s'exécute lorsqu'une connexion réseau est détectée. Il démarre le serveur HTTP s'il n'est pas déjà en cours d'exécution.
+/// @param arg Un pointeur vers une structure httpd_handle_t* représentant le serveur HTTP à démarrer.
+/// @param event_base La base de l'événement qui a déclenché cet événement.
+/// @param event_id L'ID de l'événement qui a été déclenché.
+/// @param event_data Les données de l'événement associé.
 static void connect_handler(void* arg, esp_event_base_t event_base,
                             int32_t event_id, void* event_data)
 {
@@ -272,6 +310,12 @@ static void configure_led (void)
 }
 
 //------------------------------DÉBUT PA-----------------------------------//
+
+/// @brief Cette fonction est un gestionnaire d'événements WiFi qui est appelé lorsqu'un appareil se connecte ou se déconnecte du point d'accès (PA).
+/// @param arg Un pointeur vers des données supplémentaires.
+/// @param event_base La base de l'événement qui a déclenché cet événement.
+/// @param event_id L'ID de l'événement qui a été déclenché.
+/// @param event_data Les données de l'événement associé.
 static void wifi_event_handler(void* arg, esp_event_base_t event_base,
                                     int32_t event_id, void* event_data)
 {
@@ -291,6 +335,9 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
     }
 }
 
+/// @brief Cette fonction initialise le point d'accès (PA) WiFi.
+/// @details Elle initialise le réseau, crée une boucle d'événements par défaut, configure le PA WiFi avec les paramètres spécifiés, enregistre le gestionnaire d'événements WiFi et démarre le PA.
+/// @return Rien.
 void wifi_init_softap(void)
 {
     ESP_ERROR_CHECK(esp_netif_init());
@@ -341,6 +388,9 @@ void wifi_init_softap(void)
     ESP_LOGI(TAG, "ESP32 IP:" IPSTR, IP2STR(&if_info.ip));
 }
 
+/// @brief Cette fonction démarre le point d'accès (PA) WiFi.
+/// @details Elle initialise NVS (Non-volatile Storage), puis initialise et démarre le PA WiFi.
+/// @return Rien.
 void start_wifi_softap(void)
 {
     //Initialize NVS (Non-volatile Storage) dois faire plus de recherche pour son utilité
