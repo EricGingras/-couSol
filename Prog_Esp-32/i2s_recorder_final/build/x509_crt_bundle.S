@@ -1,4 +1,4 @@
-/* * Data converted from D:/Session_6/Projet/EcouSol/Prog_Esp-32/i2s_recorder_final/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from C:/Users/Flame/Desktop/GitHub/Prog_Esp-32/i2s_recorder_final/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

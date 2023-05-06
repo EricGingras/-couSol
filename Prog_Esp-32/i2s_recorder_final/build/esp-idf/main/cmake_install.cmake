@@ -1,4 +1,4 @@
-# Install script for directory: D:/Session_6/Projet/EcouSol/Prog_Esp-32/i2s_recorder_final/main
+# Install script for directory: C:/Users/Flame/Desktop/GitHub/Prog_Esp-32/i2s_recorder_final/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,6 +34,6 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/Users/turco/.espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Users/Flame/.espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-objdump.exe")
 endif()
 

@@ -1,10 +1,19 @@
-/*
- * SPDX-FileCopyrightText: 2021-2022 Espressif Systems (Shanghai) CO LTD
- *
- * SPDX-License-Identifier: Unlicense OR CC0-1.0
+/**
+ * @file   i2s_recorder_main.c
+ * @author Eric Gingras, Jacob Turcotte
+ * @date  5 mai 2023
+ * @brief Ce programme utilise un microcontrôleur ESP-32 pour enregistré des données audio provenant 
+ * d'un ADC à l'aide du protocole I2S. Les données sont ensuite stockées sur une carte SD. Lorsque le 
+ * programme est exécuté, il est en attente d'un signal d'interruption du bouton d'enregistrement. 
+ * Lorsque le bouton est appuyé pour la première fois, le programme monte la carte SD,initialise le canal 
+ * I2S et commence à enregistrer des données audio. Les données sont stockées sur la carte SD dans un fichier 
+ * de format WAV. Lorsque le bouton est appuyé une deuxième fois, l'enregistrement s'arrête et le fichier est fermé.   
+ * 
  */
 
-/* I2S Digital Microphone Recording Example */
+
+/************************* INCLUDES *************************/
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -24,7 +33,8 @@
 #include "sdmmc_cmd.h"
 #include "sdkconfig.h"
 
-static const char *TAG = "pcm_recorder";
+
+/************************* CONSTANTES *************************/
 
 #define SPI_DMA_CHAN        SPI_DMA_CH_AUTO
 #define NUM_CHANNELS        1 // For mono recording only!
@@ -35,9 +45,13 @@ static const char *TAG = "pcm_recorder";
 #define LED_PIN 33
 #define MAX_FILENAME_LEN  32
 
-void mount_sdcard(void);
-void init_i2s_driver(void);
-void record_wav(void*);
+/************************* VARIABLES GLOBALES *************************/
+
+static const char *TAG = "pcm_recorder";
+
+const int WAVE_HEADER_SIZE = 44;
+int32_t i2s_readraw_buff[SAMPLE_SIZE];
+size_t bytes_read;
 
 // When testing SD and SPI modes, keep in mind that once the card has been
 // initialized in SPI mode, it can not be reinitialized in SD mode without
@@ -46,24 +60,37 @@ sdmmc_host_t host = SDSPI_HOST_DEFAULT();
 sdmmc_card_t *card;
 i2s_chan_handle_t rx_handle = NULL;
 
-int32_t i2s_readraw_buff[SAMPLE_SIZE];
-
-size_t bytes_read;
-const int WAVE_HEADER_SIZE = 44;
-
-static volatile bool is_recording = false;
-QueueHandle_t interputQueue;
-
 static int button_press_count = 0;
 char folder_path[MAX_FILENAME_LEN];
 char file_path[MAX_FILENAME_LEN + 32]; // Extra characters for "/record.wav"
 
+static volatile bool is_recording = false; // Variable that dictates whether the program is recording audio data or not
+QueueHandle_t interputQueue;
+
+
+/************************* PROTOTYPES *************************/
+
+void mount_sdcard(void);
+void init_i2s_driver(void);
+void record_wav(void*);
+
+
+/*
+ * @brief Gestionnaire d'interruptions de GPIO
+ * @param *args: pointeur vers les arguments de la fonction
+ * @return IRAM_ATTR: attribut pour stocker la fonction dans la RAM interne
+ */
 static void IRAM_ATTR gpio_interrupt_handler(void *args)
 {
-    int pinNumber = (int)args;
-    xQueueSendFromISR(interputQueue, &pinNumber, NULL);
+    int pinNumber = (int)args; // Get GPIO number
+    xQueueSendFromISR(interputQueue, &pinNumber, NULL); // Send pin number to interrupt queue
 }
 
+/*
+ * @brief Tâche qui détecte l'interrupt d'un bouton et qui démarre ou arrête l'enregistrement audio en conséquence
+ * @param *params: les paramètres qui seront passé aux tasks. (pas utilisé dans ce code)
+ * @return Aucun
+ */
 void Record_Control_Task(void *params)
 {
     int pinNumber=0;
@@ -75,14 +102,14 @@ void Record_Control_Task(void *params)
             {
                 vTaskDelay(10);
             }
-            while(gpio_get_level(BUTTON_PIN) == 1)
+            while(gpio_get_level(BUTTON_PIN) == 1) // Wait for the button to be released for debouncing
             {
                 vTaskDelay(10);
             }
-            //printf("GPIO %d was pressed %d times. The state is %d\n", pinNumber, button_press_count++, gpio_get_level(BUTTON_PIN));
+            // printf("GPIO %d was pressed %d times. The state is %d\n", pinNumber, button_press_count++, gpio_get_level(BUTTON_PIN));
             if(is_recording == false)
             {
-                is_recording = true;
+                is_recording = true; 
 
                 // Mount the SDCard for recording the audio file
                 mount_sdcard();
@@ -95,19 +122,24 @@ void Record_Control_Task(void *params)
 
                 ESP_LOGI(TAG, "Starting recording!");
 
-                // Start Recording
+                // Start Recording on a seperate core
                 xTaskCreatePinnedToCore(record_wav, "Record_Wav", 4096, NULL, 1, NULL, 1);
 
             }  
             else
             {
-                is_recording = false;
+                is_recording = false; // Stop recording
             }
         }
-        vTaskDelay(10);
+        vTaskDelay(10); 
     }
 }
 
+/*
+ * @brief Initialise l'interruption du bouton d'enregistrement et crée une queue pour stocker les interruptions.
+ * @param Aucun
+ * @return Aucun
+ */
 void init_interrupt(void)
 {
     //gpio_pad_select_gpio(LED_PIN);
@@ -129,6 +161,11 @@ void init_interrupt(void)
     gpio_set_level(LED_PIN, 0);
 }
 
+/*
+ * @brief Cette fonction initialise et monte la carte SD en utilisant le pilote VFS FAT et l'interface SPI.
+ * @param Aucun
+ * @return Aucun
+ */
 void mount_sdcard(void)
 {
     esp_err_t ret;
@@ -178,6 +215,15 @@ void mount_sdcard(void)
     sdmmc_card_print_info(stdout, card);
 }
 
+
+/*
+ * @brief Génère le WAV header qui contient le format des données I2S qui seront 
+    sauvegardé dans le fichier WAV
+ * @param *wav_header: un pointeur vers 
+ * @param wav_size:
+ * @param sample_rate: Le taux d'échantillonnage
+ * @return Aucun
+ */
 void generate_wav_header(char *wav_header, uint32_t wav_size, uint32_t sample_rate)
 {
     // See this for reference: http://soundfile.sapp.org/doc/WaveFormat/
@@ -204,25 +250,33 @@ void generate_wav_header(char *wav_header, uint32_t wav_size, uint32_t sample_ra
     memcpy(wav_header, set_wav_header, sizeof(set_wav_header));
 }
 
+
+/*
+ * @brief Reçoit des données audio en format I2S et les écrit sur une carte SD
+    sous forme de fichiers WAV
+ * @param Aucun
+ * @return Aucun
+ */
 void record_wav(void*)
 {
     // Use POSIX and C standard library functions to work with files.
     int flash_wr_size = 0;
-    int rec_time = 5;
+    int rec_time = 5; // Recording time in seconds
     char test_fichier_doublons = 0;
     int flash_del = 0;
-    int etat_led = 0;
-    button_press_count++;
-    gpio_set_level(LED_PIN, 1);
+    int etat_led = 0; // Current state of the LED pin
+
+    button_press_count++; // Increment button press count
+    gpio_set_level(LED_PIN, 1); // Turn on LED
+
     ESP_LOGI(TAG, "Opening file");
 
     char wav_header_fmt[WAVE_HEADER_SIZE];
     uint32_t flash_rec_time = BYTE_RATE * rec_time;
     generate_wav_header(wav_header_fmt, flash_rec_time, CONFIG_SAMPLE_RATE);
     ESP_LOGI(TAG, "Generating WAV header");
-
     
-    
+    // Loop to create a unique folder for each recording
     while(test_fichier_doublons == 0)
     {
         // Create folder name
@@ -236,7 +290,6 @@ void record_wav(void*)
         else
             test_fichier_doublons++;
     }
-    
 
     // Create the file path
     snprintf(file_path, sizeof(file_path), "%s/record.wav", folder_path);
@@ -253,6 +306,7 @@ void record_wav(void*)
     // Write the header to the WAV file
     fwrite(wav_header_fmt, 1, WAVE_HEADER_SIZE, file);
 
+    // Record audio while the flag is_recording is set
     while (is_recording) { 
         // Read the RAW samples from the microphone
         if (i2s_channel_read(rx_handle, (void *)i2s_readraw_buff, SAMPLE_SIZE, &bytes_read, 1000) == ESP_OK) {
@@ -263,13 +317,15 @@ void record_wav(void*)
         else {
             printf("Read Failed!\n");
         }
+        // Flash the LED aprrox every quarter of a second while recording
         flash_del++;
-        if(flash_del % 22 == 0) //environs au quart de seconde
+        if(flash_del % 22 == 0) 
         {
             etat_led = !etat_led;
             gpio_set_level(LED_PIN, etat_led);
         }
     }
+    // Close the file
     fclose(file);
 
     // modify WAV header
@@ -295,7 +351,7 @@ void record_wav(void*)
     // Regenerate the wav header with the correct size
     generate_wav_header(wav_header_fmt, dataSize, CONFIG_SAMPLE_RATE);
 
-    // Rewrite the header to the WAV file with the correct timing
+    // Rewrite the new wav header to the SD card
     fwrite(wav_header_fmt, 1, WAVE_HEADER_SIZE, file);
 
     ESP_LOGI(TAG, "Recording done!");
@@ -314,6 +370,11 @@ void record_wav(void*)
     vTaskDelete(NULL);
 }
 
+/*
+ * @brief Initialise et configure le driver I2S
+ * @param Aucun
+ * @return Aucun
+ */
 void init_i2s_driver(void)
 {
     i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_AUTO, I2S_ROLE_SLAVE);
@@ -347,7 +408,7 @@ void init_i2s_driver(void)
     ESP_ERROR_CHECK(i2s_channel_init_std_mode(rx_handle, &std_cfg));
 }
 
-
+/****** PROGRAMME PRINCPAL ******/
 void app_main(void)
 {
     printf("PCM microphone recording start\n--------------------------------------\n");
